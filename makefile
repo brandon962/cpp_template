@@ -12,6 +12,8 @@ INC_FLAGS := $(addprefix -I,$(INC_PATH))
 
 CPPFLAGS ?= $(INC_FLAGS) -MMD -MP -std=c++17
 
+all: $(TARGET_EXEC)
+
 $(TARGET_EXEC): $(OBJS)
 	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
 
@@ -20,7 +22,7 @@ $(BUILD_DIR)/%.cpp.o: $(SRC_DIRS)/%.cpp
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	$(RM) -r $(BUILD_DIR)
